@@ -6,19 +6,19 @@
 #include "GameFramework/PlayerController.h"
 #include "AuraPlayerController.generated.h"
 
-class IEnemyInterface;
+
 class UInputMappingContext;
 class UInputAction;
 struct FInputActionValue;
+class IEnemyInterface;
 
 /**
- * 
+ *
  */
 UCLASS()
 class AURA_API AAuraPlayerController : public APlayerController
 {
 	GENERATED_BODY()
-
 
 public:
 	AAuraPlayerController();
@@ -38,7 +38,6 @@ private:
 	void Move(const FInputActionValue& InputActionValue);
 
 	void CursorTrace();
-
 	IEnemyInterface* LastActor;
 	IEnemyInterface* ThisActor;
 };
