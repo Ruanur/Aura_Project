@@ -90,8 +90,10 @@ void AAuraPlayerController::BeginPlay()
 	//Error : EnhancedInputSubsystems.h 헤더를 열 수 없음
 	//Solution : Build.cs 파일 내 PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput" });
 	//EnhancedInput 입력, Binaries 폴더 삭제 후 uproject 우클릭 후 visual studio 프로젝트 생성 
-	check(Subsystem);
-	Subsystem->AddMappingContext(AuraContext, 0);
+	if (Subsystem)
+	{
+		Subsystem->AddMappingContext(AuraContext, 0);
+	}
 
 	bShowMouseCursor = true;
 	DefaultMouseCursor = EMouseCursor::Default;
