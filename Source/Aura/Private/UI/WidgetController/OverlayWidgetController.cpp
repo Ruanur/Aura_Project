@@ -36,10 +36,15 @@ void UOverlayWidgetController::BindCallbacksToDependencies()
 		{
 			for (const FGameplayTag& Tag : AssetTags)
 			{
-				const FString Msg = FString::Printf(TEXT("GE TAG : %s"), *Tag.ToString());
-				GEngine->AddOnScreenDebugMessage(-1, 8.f, FColor::Blue, Msg);
+				// 예를 들어, Tag = Message.HealthPotion라고 한다면, 
 
-				GetDataTableRowByTag<FUIWidgetRow>(MessageWidgetDataTable, Tag);
+				//"Message.HealthPotion".MatchesTag("Message")는 True를 리턴, "Message".MatchesTag("Message.HealthPotion")는 False를 리턴할 것이다. 
+				FGameplayTag MessageTag = FGameplayTag::RequestGameplayTag(FName("Message"));
+				if (Tag.MatchesTag(MessageTag))
+				{
+					const FUIWidgetRow* Row = GetDataTableRowByTag<FUIWidgetRow>(MessageWidgetDataTable, Tag);
+					MessageWidgetRowDelegate.Broadcast(*Row);
+				}
 			}
 		}
 	);
