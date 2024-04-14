@@ -83,7 +83,15 @@ void UAuraAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallba
 	SetEffectProperties(Data, Props);
 
 	
-	
+	if (Data.EvaluatedData.Attribute == GetHealthAttribute())
+	{
+		//체력이 100으로 꽉 찼을 때, 데미지를 입지 않는 현상이 있었음, SetHealth()로 값 수정
+		SetHealth(FMath::Clamp(GetHealth(), 0.f, GetMaxHealth()));
+	}
+	if (Data.EvaluatedData.Attribute == GetManaAttribute())
+	{
+		SetMana(FMath::Clamp(GetMana(), 0.f, GetMaxMana()));
+	}
 }
 
 void UAuraAttributeSet::OnRep_Health(const FGameplayAttributeData& OldHealth) const
