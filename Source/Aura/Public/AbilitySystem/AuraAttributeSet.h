@@ -7,12 +7,14 @@
 #include "AbilitySystemComponent.h"
 #include "AuraAttributeSet.generated.h"
 
+//속성 접근 매크로
 #define ATTRIBUTE_ACCESSORS(ClassName, PropertyName) \
 	GAMEPLAYATTRIBUTE_PROPERTY_GETTER(ClassName, PropertyName) \
 	GAMEPLAYATTRIBUTE_VALUE_GETTER(PropertyName) \
 	GAMEPLAYATTRIBUTE_VALUE_SETTER(PropertyName) \
 	GAMEPLAYATTRIBUTE_VALUE_INITTER(PropertyName)
 
+//이펙트 속성 구조체
 USTRUCT()
 struct FEffectProperties
 {
@@ -50,6 +52,8 @@ struct FEffectProperties
 /**
  *
  */
+
+//속성 집합 클래스
 UCLASS()
 class AURA_API UAuraAttributeSet : public UAttributeSet
 {
@@ -112,6 +116,7 @@ public:
 	* 속성이 필요한 모든 작업에는 이와 같은 상용구 단계를 따라야 한다. 
 	*/
 
+	//리플리케이트된 속성 변경 알림 함수
 	UFUNCTION()
 	void OnRep_Health(const FGameplayAttributeData& OldHealth) const;
 
@@ -137,6 +142,7 @@ public:
 	void OnRep_Vigor(const FGameplayAttributeData& OldVigor) const;
 
 private:
+	//이펙트 속성 설정 함수
 	void SetEffectProperties(const FGameplayEffectModCallbackData& Data, FEffectProperties& Props) const;
 };
 
