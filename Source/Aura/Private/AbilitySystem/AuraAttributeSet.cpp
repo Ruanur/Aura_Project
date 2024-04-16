@@ -10,7 +10,7 @@
 //속성 값 초기화
 UAuraAttributeSet::UAuraAttributeSet()
 {
-	InitHealth(50.f);
+	InitHealth(10.0f);
 	InitMaxHealth(100.f);
 	InitMana(10.f);
 	InitMaxMana(50.f);
@@ -43,11 +43,11 @@ void UAuraAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, 
 	//체력과 마나가 최대값을 초과하지 않도록 제한, Clamp
 	if (Attribute == GetHealthAttribute())
 	{
-		NewValue = FMath::Clamp(NewValue, 0.f, GetMaxHealth()); //현재 체력이 최대 체력을 초과할 수 없음.
+		//NewValue = FMath::Clamp(NewValue, 0.f, GetMaxHealth()); //현재 체력이 최대 체력을 초과할 수 없음.
 	}
 	if (Attribute == GetManaAttribute())
 	{
-		NewValue = FMath::Clamp(NewValue, 0.f, GetMaxMana()); //현재 마나가 최대 마나를 초과할 수 없음
+		//NewValue = FMath::Clamp(NewValue, 0.f, GetMaxMana()); //현재 마나가 최대 마나를 초과할 수 없음
 	}
 }
 
@@ -97,11 +97,11 @@ void UAuraAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallba
 	if (Data.EvaluatedData.Attribute == GetHealthAttribute())
 	{
 		//체력이 꽉 찼을 때, 데미지를 입지 않는 현상이 있었음, SetHealth()로 값 수정
-		SetHealth(FMath::Clamp(GetHealth(), 0.f, GetMaxHealth()));
+		//SetHealth(FMath::Clamp(GetHealth(), 0.f, GetMaxHealth()));
 	}
 	if (Data.EvaluatedData.Attribute == GetManaAttribute())
 	{
-		SetMana(FMath::Clamp(GetMana(), 0.f, GetMaxMana()));
+		//SetMana(FMath::Clamp(GetMana(), 0.f, GetMaxMana()));
 	}
 }
 
