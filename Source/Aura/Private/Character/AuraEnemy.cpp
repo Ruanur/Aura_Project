@@ -1,10 +1,9 @@
 // Copyright Min Creater
 
-
 #include "Character/AuraEnemy.h"
 #include "AbilitySystem/AuraAbilitySystemComponent.h"
-#include "Aura/Aura.h"
 #include "AbilitySystem/AuraAttributeSet.h"
+#include "Aura/Aura.h"
 
 AAuraEnemy::AAuraEnemy()
 {
@@ -29,6 +28,11 @@ void AAuraEnemy::UnHighlightActor()
 {
 	GetMesh()->SetRenderCustomDepth(false);
 	Weapon->SetRenderCustomDepth(false);
+}
+
+int32 AAuraEnemy::GetPlayerLevel()
+{
+	return Level;
 }
 
 void AAuraEnemy::BeginPlay()

@@ -2,12 +2,12 @@
 
 
 #include "Character/AuraCharacter.h"
-#include "Player/AuraPlayerController.h"
-#include "GameFramework/CharacterMovementComponent.h"
-#include "Player/AuraPlayerState.h"
 #include "AbilitySystemComponent.h"
-#include "UI/HUD/AuraHUD.h"
 #include "AbilitySystem/AuraAbilitySystemComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
+#include "Player/AuraPlayerController.h"
+#include "Player/AuraPlayerState.h"
+#include "UI/HUD/AuraHUD.h"
 
 AAuraCharacter::AAuraCharacter()
 {
@@ -35,6 +35,13 @@ void AAuraCharacter::OnRep_PlayerState()
 	
 	// Init ability actor info for the Client
 	InitAbilityActorInfo();
+}
+
+int32 AAuraCharacter::GetPlayerLevel()
+{
+	const AAuraPlayerState* AuraPlayerState = GetPlayerState<AAuraPlayerState>();
+	check(AuraPlayerState);
+	return AuraPlayerState->GetPlayerLevel();
 }
 
 void AAuraCharacter::InitAbilityActorInfo()
