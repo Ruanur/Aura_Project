@@ -85,4 +85,38 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 		FName("Attributes.Secondary.MaxMana"),
 		FString("최대 마나")
 	);
+
+	/*
+	* Input Tags 
+	*/
+	GameplayTags.InputTag_LMB = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Inputag.LMB"),
+		FString("왼쪽 클릭 Input Tag")
+	);
+
+	GameplayTags.InputTag_RMB = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Inputag.RMB"),
+		FString("오른쪽 클릭 Input Tag")
+	);
+
+	GameplayTags.InputTag_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Inputag.1"),
+		FString("숫자 1 Input Tag.")
+	);
+
+	GameplayTags.InputTag_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Inputag.2"),
+		FString("숫자 2 Input Tag.")
+	);
+
+	GameplayTags.InputTag_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Inputag.3"),
+		FString("숫자 3 Input Tag.")
+	);
+
+	GameplayTags.InputTag_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Inputag.4"),
+		FString("숫자 4 Input Tag.")
+	);
+
 }
