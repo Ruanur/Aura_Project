@@ -90,32 +90,32 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 	* Input Tags 
 	*/
 	GameplayTags.InputTag_LMB = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("Inputag.LMB"),
+		FName("InputTag.LMB"),
 		FString("왼쪽 클릭 Input Tag")
 	);
 
 	GameplayTags.InputTag_RMB = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("Inputag.RMB"),
+		FName("InputTag.RMB"),
 		FString("오른쪽 클릭 Input Tag")
 	);
 
 	GameplayTags.InputTag_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("Inputag.1"),
+		FName("InputTag.1"),
 		FString("숫자 1 Input Tag.")
 	);
 
 	GameplayTags.InputTag_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("Inputag.2"),
+		FName("InputTag.2"),
 		FString("숫자 2 Input Tag.")
 	);
 
 	GameplayTags.InputTag_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("Inputag.3"),
+		FName("InputTag.3"),
 		FString("숫자 3 Input Tag.")
 	);
 
 	GameplayTags.InputTag_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("Inputag.4"),
+		FName("InputTag.4"),
 		FString("숫자 4 Input Tag.")
 	);
 
