@@ -7,7 +7,7 @@
 #include "AuraInputConfig.h"
 #include "AuraInputComponent.generated.h"
 
-/**
+/*
  * 
  */
 UCLASS()
