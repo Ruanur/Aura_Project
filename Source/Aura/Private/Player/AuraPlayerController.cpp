@@ -7,25 +7,32 @@
 #include "Input/AuraInputComponent.h"
 #include "Interaction/EnemyInterface.h"
 
+//생성자
 AAuraPlayerController::AAuraPlayerController()
 {
-	bReplicates = true;
+	bReplicates = true; //복제 활성화
 
 }
 
+//매 프레임 호출
 void AAuraPlayerController::PlayerTick(float DeltaTime)
 {
-	Super::PlayerTick(DeltaTime);
+	Super::PlayerTick(DeltaTime); //부모 클래스의 PlayerTick 함수 호출
 
-	CursorTrace();
+	CursorTrace(); //커서 추적 함수
 }
 
+//CursorTrace, 플레이어의 커서 위치를 추적하고 해당 위치에서 어떤 액터에 충돌했는지 검사
+//상호작용힐 액터 결정
 void AAuraPlayerController::CursorTrace()
 {
 	FHitResult CursorHit;
+	//커서가 보이는 것 아래에서 충돌 검사를 실행 
 	GetHitResultUnderCursor(ECC_Visibility, false, CursorHit);
+	//블록되는 충돌이 없으면 반환
 	if (!CursorHit.bBlockingHit) return;
 
+	//충돌한 액터를 IEnemyInterface로 캐스팅
 	LastActor = ThisActor;
 	ThisActor = Cast<IEnemyInterface>(CursorHit.GetActor());
 	
@@ -79,16 +86,19 @@ void AAuraPlayerController::CursorTrace()
 	}
 }
 
+//특정 입력에 대한 액션 처리
 void AAuraPlayerController::AbilityInputTagPressed(FGameplayTag InputTag)
 {
 	GEngine->AddOnScreenDebugMessage(1, 3.f, FColor::Red, *InputTag.ToString());
 }
 
+//특정 입력의 릴리스에 대한 액션 처리
 void AAuraPlayerController::AbilityInputTagReleased(FGameplayTag InputTag)
 {
 	GEngine->AddOnScreenDebugMessage(2, 3.f, FColor::Blue, *InputTag.ToString());
 }
 
+//특정 입력을 계속 누르고 있는 동안의 액션 처리
 void AAuraPlayerController::AbilityInputTagHeld(FGameplayTag InputTag)
 {
 	GEngine->AddOnScreenDebugMessage(3, 3.f, FColor::Green, *InputTag.ToString());
@@ -98,6 +108,7 @@ void AAuraPlayerController::AbilityInputTagHeld(FGameplayTag InputTag)
 void AAuraPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
+
 	//check를 사용하여 AuraContext 포인터 확인
 	//이 조건이 실패하면 실행을 중단
 	check(AuraContext);
