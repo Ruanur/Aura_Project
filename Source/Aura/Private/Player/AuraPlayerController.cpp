@@ -4,8 +4,10 @@
 #include "Player/AuraPlayerController.h"
 
 #include "AbilitySystemBlueprintLibrary.h"
+#include "AuraGameplayTags.h"
 #include "EnhancedInputSubsystems.h"
 #include "AbilitySystem/AuraAbilitySystemComponent.h"
+#include "Components/SplineComponent.h"
 #include "Input/AuraInputComponent.h"
 #include "Interaction/EnemyInterface.h"
 
@@ -14,6 +16,9 @@ AAuraPlayerController::AAuraPlayerController()
 {
 	bReplicates = true; //복제 활성화
 
+	//CreateDefaultSubobject : USplineComponent의 새로운 인스턴스를 생성하는데 사용
+	//USplineComponent : 스플라인 기반의 곡선을 나타내는 클래스, 이동 경로를 위해 사용
+	Spline = CreateDefaultSubobject<USplineComponent>("Spline");
 }
 
 //매 프레임 호출
@@ -91,7 +96,13 @@ void AAuraPlayerController::CursorTrace()
 //특정 입력에 대한 액션 처리
 void AAuraPlayerController::AbilityInputTagPressed(FGameplayTag InputTag)
 {
-	//GEngine->AddOnScreenDebugMessage(1, 3.f, FColor::Red, *InputTag.ToString());
+	//입력 태그가 마우스 왼쪽 버튼인 경우
+	if (InputTag.MatchesTagExact(FAuraGameplayTags::Get().InputTag_LMB))
+	{
+		//ThisActor가 유효한 경우에반 상호작용 대상 설정
+		bTargeting = ThisActor ? true : false;
+		bAutoRunning = false;
+	}
 }
 
 //특정 입력의 릴리스에 대한 액션 처리
@@ -104,8 +115,38 @@ void AAuraPlayerController::AbilityInputTagReleased(FGameplayTag InputTag)
 //특정 입력을 계속 누르고 있는 동안의 액션 처리
 void AAuraPlayerController::AbilityInputTagHeld(FGameplayTag InputTag)
 {
-	if (GetASC() == nullptr) return;
-	GetASC()->AbilityInputTagHeld(InputTag);
+	if (!InputTag.MatchesTagExact(FAuraGameplayTags::Get().InputTag_LMB))
+	{
+		if (GetASC())
+		{
+			GetASC()->AbilityInputTagHeld(InputTag);
+		}
+		return;
+	}
+
+	if (bTargeting)
+	{
+		if (GetASC())
+		{
+			GetASC()->AbilityInputTagHeld(InputTag);
+		}
+	}
+	else
+	{
+		FollowTime += GetWorld()->GetDeltaSeconds();
+
+		FHitResult Hit;
+		if (GetHitResultUnderCursor(ECC_Visibility, false, Hit))
+		{
+			CachedDestination = Hit.ImpactPoint;
+		}
+
+		if (APawn* ControlledPawn = GetPawn())
+		{
+			const FVector WorldDirection = (CachedDestination - ControlledPawn->GetActorLocation()).GetSafeNormal();
+			ControlledPawn->AddMovementInput(WorldDirection);
+		}
+	}
 }
 
 UAuraAbilitySystemComponent* AAuraPlayerController::GetASC()
@@ -135,9 +176,11 @@ void AAuraPlayerController::BeginPlay()
 		Subsystem->AddMappingContext(AuraContext, 0);
 	}
 
+	//마우스 커서 설정
 	bShowMouseCursor = true;
 	DefaultMouseCursor = EMouseCursor::Default;
 
+	//입력 모드 설정
 	FInputModeGameAndUI InputModeData;
 	InputModeData.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
 	InputModeData.SetHideCursorDuringCapture(false);
@@ -145,15 +188,18 @@ void AAuraPlayerController::BeginPlay()
 
 }
 
+//입력 컴포넌트 설정
 void AAuraPlayerController::SetupInputComponent()
 {
 	Super::SetupInputComponent();
 
+	//AuraInputComponent 바인딩
 	UAuraInputComponent* AuraInputComponent = CastChecked<UAuraInputComponent>(InputComponent);
 	AuraInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AAuraPlayerController::Move);
 	AuraInputComponent->BindAbilityActions(InputConfig, this, &ThisClass::AbilityInputTagPressed, &ThisClass::AbilityInputTagReleased, &ThisClass::AbilityInputTagHeld);
 }
 
+//이동 액션 처리
 void AAuraPlayerController::Move(const FInputActionValue& InputActionValue)
 {
 	const FVector2D InputAxisVector = InputActionValue.Get<FVector2D>();
