@@ -67,9 +67,11 @@ private:
 	bool bTargeting = false; //대상 지정 여부
 
 	UPROPERTY(EditDefaultsOnly)
-	float AuraRunAcceptanceRadius = 50.f; //달리기 허용 반경
+	float AutoRunAcceptanceRadius = 50.f; //달리기 허용 반경
 
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<USplineComponent> Spline; //스플라인 컴포넌트
+
+	void AutoRun();
 };
 
