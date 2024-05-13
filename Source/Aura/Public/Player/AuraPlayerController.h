@@ -45,6 +45,7 @@ private:
 	void CursorTrace();
 	IEnemyInterface* LastActor; //이전 액터
 	IEnemyInterface* ThisActor; //현재 액터
+	FHitResult CursorHit;
 
 	void AbilityInputTagPressed(FGameplayTag InputTag);
 	void AbilityInputTagReleased(FGameplayTag InputTag);
