@@ -32,5 +32,5 @@ protected:
 private:
 
 	UPROPERTY(VisibleAnywhere)
-	TObjectPtr<USphereComponent> Sphere;
+	TObjectPtr<USphereComponent> Sphere; 
 };

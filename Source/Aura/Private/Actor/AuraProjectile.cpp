@@ -6,9 +6,10 @@
 #include "GameFramework/ProjectileMovementComponent.h"
 
 // Sets default values
+//발사체 클래스 뼈대
 AAuraProjectile::AAuraProjectile()
 {
-	//발사체 클래스 뼈대
+	
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 
