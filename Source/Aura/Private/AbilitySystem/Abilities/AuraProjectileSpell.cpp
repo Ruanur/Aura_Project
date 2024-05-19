@@ -14,7 +14,7 @@ void UAuraProjectileSpell::ActivateAbility(const FGameplayAbilitySpecHandle Hand
 	//참고: 여기에서 능력을 활성화하는 추가 기능을 추가할 수 있다.
 }
 
-void UAuraProjectileSpell::SpawnProjectile()
+void UAuraProjectileSpell::SpawnProjectile(const FVector& ProjectileTargetLocation)
 {
 	//서버가 투사체를 생성할 권한이 있는지 확인 
 	const bool bIsServer = GetAvatarActorFromActorInfo()->HasAuthority();
@@ -27,10 +27,13 @@ void UAuraProjectileSpell::SpawnProjectile()
 	{
 		//전투 소켓 위치를 가져옴
 		const FVector SocketLocation = CombatInterface->GetCombatSocketLocation();
+		FRotator Rotation = (ProjectileTargetLocation - SocketLocation).Rotation();
+		Rotation.Pitch = 0.f;
 
 		//스폰 트랜스폼 설정
 		FTransform SpawnTransform;
 		SpawnTransform.SetLocation(SocketLocation);
+		SpawnTransform.SetRotation(Rotation.Quaternion());
 		//TODO : 투사체 회전 설정
 
 		//투사체를 지연 생성
