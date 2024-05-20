@@ -1,11 +1,14 @@
-// Copyright Min Creater
+// Copyright Druid Mechanics
 
 #pragma once
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "GameplayEffectTypes.h"
+#include "GameplayEffect.h" // Ãß°¡
+#include "AbilitySystemComponent.h"
 #include "AuraEffectActor.generated.h"
+
 
 class UAbilitySystemComponent;
 class UGameplayEffect;
@@ -32,7 +35,6 @@ class AURA_API AAuraEffectActor : public AActor
 	
 public:	
 	AAuraEffectActor();
-	
 
 protected:
 	virtual void BeginPlay() override;
@@ -47,8 +49,8 @@ protected:
 	void OnEndOverlap(AActor* TargetActor);
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Applied Effects")
-	bool bDestoryOnEffectRemoval = false;
-
+	bool bDestroyOnEffectRemoval = false;
+	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Applied Effects")
 	TSubclassOf<UGameplayEffect> InstantGameplayEffectClass;
 
@@ -56,24 +58,22 @@ protected:
 	EEffectApplicationPolicy InstantEffectApplicationPolicy = EEffectApplicationPolicy::DoNotApply;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Applied Effects")
-	TSubclassOf<UGameplayEffect>DurationGameplayEffectClass;
+	TSubclassOf<UGameplayEffect> DurationGameplayEffectClass;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Applied Effects")
-	EEffectApplicationPolicy DurationEffectApplicationPolicy = EEffectApplicationPolicy::DoNotApply;;
+	EEffectApplicationPolicy DurationEffectApplicationPolicy = EEffectApplicationPolicy::DoNotApply;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Applied Effects")
-	TSubclassOf<UGameplayEffect>InfiniteGameplayEffectClass;
+	TSubclassOf<UGameplayEffect> InfiniteGameplayEffectClass;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Applied Effects")
-	EEffectApplicationPolicy InfiniteEffectApplicationPolicy = EEffectApplicationPolicy::DoNotApply;;
+	EEffectApplicationPolicy InfiniteEffectApplicationPolicy = EEffectApplicationPolicy::DoNotApply;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Applied Effects")
 	EEffectRemovalPolicy InfiniteEffectRemovalPolicy = EEffectRemovalPolicy::RemoveOnEndOverlap;
 
 	TMap<FActiveGameplayEffectHandle, UAbilitySystemComponent*> ActiveEffectHandles;
 
-	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Applied Effects")
 	float ActorLevel = 1.f;
-
 };
