@@ -1,4 +1,4 @@
-// Copyright Min Creater
+ // Copyright Min Creater
 
 #pragma once
 
