@@ -119,4 +119,8 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 		FString("숫자 4 Input Tag.")
 	);
 
+	GameplayTags.Damage = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage"),
+		FString("피해")
+	);
 }
