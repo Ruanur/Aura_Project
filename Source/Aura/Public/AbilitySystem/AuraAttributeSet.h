@@ -159,6 +159,16 @@ public:
 	*/
 
 	//리플리케이트된 속성 변경 알림 함수
+
+	/*
+	* Meta Attribute
+	*/
+
+	UPROPERTY(BlueprintReadOnly, Category = "Meta Attributes")
+	FGameplayAttributeData IncomingDamage;
+	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, IncomingDamage);
+
+
 	UFUNCTION()
 	void OnRep_Health(const FGameplayAttributeData& OldHealth) const;
 
