@@ -124,7 +124,7 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 		FString("피해")
 	);
 
-	GameplayTags.Effect_HitReact = UGameplayTagsManager::Get().AddNativeGameplayTag(
+	GameplayTags.Effects_HitReact = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Effect.HitReact"),
 		FString("히트 반응 시 태그 부여")
 	);

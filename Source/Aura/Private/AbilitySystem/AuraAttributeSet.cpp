@@ -8,6 +8,7 @@
 #include "GameplayEffectExtension.h"
 #include "AuraGameplayTags.h"
 
+
 //속성 값 초기화
 UAuraAttributeSet::UAuraAttributeSet()
 {
@@ -151,6 +152,12 @@ void UAuraAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallba
 			SetHealth(FMath::Clamp(NewHealth, 0.f, GetMaxHealth()));
 
 			const bool bFatal = NewHealth <= 0.f;
+			if (!bFatal)
+			{
+				FGameplayTagContainer TagContainer;
+				TagContainer.AddTag(FAuraGameplayTags::Get().Effects_HitReact);
+				Props.TargetASC->TryActivateAbilitiesByTag(TagContainer);
+			}
 		}
 
 	}
