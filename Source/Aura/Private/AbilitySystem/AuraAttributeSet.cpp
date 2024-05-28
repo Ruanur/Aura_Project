@@ -8,6 +8,8 @@
 #include "GameplayEffectExtension.h"
 #include "AuraGameplayTags.h"
 #include "Character/AuraCharacterBase.h"
+#include "Kismet/GameplayStatics.h"
+#include "Player/AuraPlayerController.h"
 
 
 //속성 값 초기화
@@ -124,6 +126,7 @@ void UAuraAttributeSet::SetEffectProperties(const FGameplayEffectModCallbackData
 	}
 }
 
+
 //이펙트 실행 후 호출되는 함수
 void UAuraAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data)
 {
@@ -167,8 +170,22 @@ void UAuraAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallba
 				TagContainer.AddTag(FAuraGameplayTags::Get().Effects_HitReact);
 				Props.TargetASC->TryActivateAbilitiesByTag(TagContainer);
 			}
+
+			ShowFloatingText(Props, LocalIncomingDamage);
 		}
 
+	}
+}
+
+
+void UAuraAttributeSet::ShowFloatingText(const FEffectProperties& Props, float Damage) const 
+{
+	if (Props.SourceCharacter != Props.TargetCharater)
+	{
+		if (AAuraPlayerController* PC = Cast<AAuraPlayerController>(UGameplayStatics::GetPlayerController(Props.SourceCharacter, 0)))
+		{
+			PC->ShowDamageNumber(Damage, Props.TargetCharater);
+		}
 	}
 }
 
