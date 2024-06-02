@@ -3,6 +3,7 @@
 #include "GameplayEffectTypes.h"
 #include "AuraAbilityTypes.generated.h"
 
+
 USTRUCT(BlueprintType)
 struct FAuraGameplayEffectContext : public FGameplayEffectContext
 {
