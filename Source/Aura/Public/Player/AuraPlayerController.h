@@ -31,7 +31,7 @@ public:
 	virtual void PlayerTick(float DeltaTime) override; //매 프레임 호출
 
 	UFUNCTION(Client, Reliable)
-	void ShowDamageNumber(float DamageAmount, ACharacter* TargetCharacter);
+	void ShowDamageNumber(float DamageAmount, ACharacter* TargetCharacter, bool bBlockedHit, bool bCriticalHit);
 
 	
 
