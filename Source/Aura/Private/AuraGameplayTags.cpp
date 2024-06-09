@@ -181,4 +181,13 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 		FName("Effect.HitReact"),
 		FString("히트 반응 시 태그 부여")
 	);
+
+	/*
+	* 능력
+	*/
+
+	GameplayTags.Effects_HitReact = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Abilities.Attack"),
+		FString("Attack Ability Tag")
+	);
 }
