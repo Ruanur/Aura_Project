@@ -46,7 +46,7 @@ struct FEffectProperties
 	AController* TargetController = nullptr;
 
 	UPROPERTY()
-	ACharacter* TargetCharater = nullptr;
+	ACharacter* TargetCharacter = nullptr;
 };
 template<class T>
 using TStaticFuncPtr = typename TBaseStaticDelegateInstance<T, FDefaultDelegateUserPolicy>::FFuncPtr;
