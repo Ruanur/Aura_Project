@@ -28,7 +28,9 @@ void UAuraProjectileSpell::SpawnProjectile(const FVector& ProjectileTargetLocati
 	ICombatInterface* CombatInterface = Cast<ICombatInterface>(GetAvatarActorFromActorInfo());
 	if (CombatInterface)
 	{
-		const FVector SocketLocation = ICombatInterface::Execute_GetCombatSocketLocation(GetAvatarActorFromActorInfo());
+		const FVector SocketLocation = ICombatInterface::Execute_GetCombatSocketLocation(
+			GetAvatarActorFromActorInfo(),
+			FAuraGameplayTags::Get().Montage_Attack_Weapon);
 
 		//전투 소켓 위치를 가져옴
 		FRotator Rotation = (ProjectileTargetLocation - SocketLocation).Rotation();
