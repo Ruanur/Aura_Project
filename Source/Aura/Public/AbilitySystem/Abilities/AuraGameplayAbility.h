@@ -1,4 +1,4 @@
-// Copyright Druid Mechanics
+// Copyright Min Creater
 
 #pragma once
 
@@ -13,8 +13,11 @@ UCLASS()
 class AURA_API UAuraGameplayAbility : public UGameplayAbility
 {
 	GENERATED_BODY()
+	
 public:
 
-	UPROPERTY(EditDefaultsOnly, Category="Input")
+	UPROPERTY(EditDefaultsOnly, Category = "Input")
 	FGameplayTag StartupInputTag;
+
+
 };

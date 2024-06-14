@@ -1,4 +1,4 @@
-// Copyright Druid Mechanics
+// Copyright Min Creater
 
 #pragma once
 
@@ -13,15 +13,17 @@ UCLASS()
 class AURA_API AAuraCharacter : public AAuraCharacterBase
 {
 	GENERATED_BODY()
+
 public:
 	AAuraCharacter();
 	virtual void PossessedBy(AController* NewController) override;
 	virtual void OnRep_PlayerState() override;
 
-	/** Combat Interface */
+
+	/* Combat Interface */
 	virtual int32 GetPlayerLevel() override;
-	/** end Combat Interface */
-	
+	/*end Combat Interface*/
+
 private:
 	virtual void InitAbilityActorInfo() override;
 };

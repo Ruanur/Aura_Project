@@ -1,4 +1,4 @@
-// Copyright Druid Mechanics
+// Copyright Min Creater
 
 #pragma once
 
@@ -13,6 +13,7 @@ UCLASS()
 class AURA_API UMMC_MaxHealth : public UGameplayModMagnitudeCalculation
 {
 	GENERATED_BODY()
+
 public:
 	UMMC_MaxHealth();
 

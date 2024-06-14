@@ -1,9 +1,9 @@
-// Copyright Druid Mechanics
+// Copyright Min Creator
 
 
 #include "AbilitySystem/Data/CharacterClassInfo.h"
 
 FCharacterClassDefaultInfo UCharacterClassInfo::GetClassDefaultInfo(ECharacterClass CharacterClass)
 {
-	return CharacterClassInformation.FindChecked(CharacterClass);
+	return CharacterClassInfomation.FindChecked(CharacterClass);
 }

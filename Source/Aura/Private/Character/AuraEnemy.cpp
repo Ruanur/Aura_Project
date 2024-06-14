@@ -1,20 +1,18 @@
-// Copyright Druid Mechanics
-
+// Copyright Min Creater
 
 #include "Character/AuraEnemy.h"
 
 #include "AbilitySystem/AuraAbilitySystemComponent.h"
-#include "AbilitySystem/AuraAbilitySystemLibrary.h"
 #include "AbilitySystem/AuraAttributeSet.h"
 #include "Components/WidgetComponent.h"
 #include "Aura/Aura.h"
 #include "UI/Widget/AuraUserWidget.h"
+#include "AbilitySystem/AuraAbilitySystemLibrary.h"
 #include "AuraGameplayTags.h"
 #include "AI/AuraAIController.h"
 #include "BehaviorTree/BehaviorTree.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
-
 
 AAuraEnemy::AAuraEnemy()
 {
@@ -27,6 +25,7 @@ AAuraEnemy::AAuraEnemy()
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationRoll = false;
 	bUseControllerRotationYaw = false;
+
 	GetCharacterMovement()->bUseControllerDesiredRotation = true;
 
 	AttributeSet = CreateDefaultSubobject<UAuraAttributeSet>("AttributeSet");
@@ -45,6 +44,7 @@ void AAuraEnemy::PossessedBy(AController* NewController)
 	AuraAIController->RunBehaviorTree(BehaviorTree);
 	AuraAIController->GetBlackboardComponent()->SetValueAsBool(FName("HitReacting"), false);
 	AuraAIController->GetBlackboardComponent()->SetValueAsBool(FName("RangedAttacker"), CharacterClass != ECharacterClass::Warrior);
+
 }
 
 void AAuraEnemy::HighlightActor()
@@ -82,6 +82,7 @@ AActor* AAuraEnemy::GetCombatTarget_Implementation() const
 	return CombatTarget;
 }
 
+
 void AAuraEnemy::BeginPlay()
 {
 	Super::BeginPlay();
@@ -89,15 +90,15 @@ void AAuraEnemy::BeginPlay()
 	InitAbilityActorInfo();
 	if (HasAuthority())
 	{
-		UAuraAbilitySystemLibrary::GiveStartupAbilities(this, AbilitySystemComponent, CharacterClass);	
+		UAuraAbilitySystemLibrary::GiveStartupAbilities(this, AbilitySystemComponent, CharacterClass);
 	}
-
 	
+
 	if (UAuraUserWidget* AuraUserWidget = Cast<UAuraUserWidget>(HealthBar->GetUserWidgetObject()))
 	{
 		AuraUserWidget->SetWidgetController(this);
 	}
-	
+
 	if (const UAuraAttributeSet* AuraAS = Cast<UAuraAttributeSet>(AttributeSet))
 	{
 		AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(AuraAS->GetHealthAttribute()).AddLambda(
@@ -122,6 +123,7 @@ void AAuraEnemy::BeginPlay()
 		OnMaxHealthChanged.Broadcast(AuraAS->GetMaxHealth());
 	}
 	
+	
 }
 
 void AAuraEnemy::HitReactTagChanged(const FGameplayTag CallbackTag, int32 NewCount)
@@ -132,6 +134,8 @@ void AAuraEnemy::HitReactTagChanged(const FGameplayTag CallbackTag, int32 NewCou
 	{
 		AuraAIController->GetBlackboardComponent()->SetValueAsBool(FName("HitReacting"), bHitReacting);
 	}
+	
+
 }
 
 void AAuraEnemy::InitAbilityActorInfo()
@@ -141,9 +145,10 @@ void AAuraEnemy::InitAbilityActorInfo()
 
 	if (HasAuthority())
 	{
-		InitializeDefaultAttributes();		
+		InitializeDefaultAttributes();
 	}
 
+	
 }
 
 void AAuraEnemy::InitializeDefaultAttributes() const

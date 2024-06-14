@@ -1,4 +1,4 @@
-// Copyright Druid Mechanics
+// Copyright Min Creater
 
 
 #include "UI/WidgetController/AuraWidgetController.h"
@@ -13,10 +13,10 @@ void UAuraWidgetController::SetWidgetControllerParams(const FWidgetControllerPar
 
 void UAuraWidgetController::BroadcastInitialValues()
 {
-	
+
 }
 
 void UAuraWidgetController::BindCallbacksToDependencies()
 {
-	
+
 }

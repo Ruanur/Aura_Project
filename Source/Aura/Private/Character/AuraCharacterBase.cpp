@@ -1,15 +1,17 @@
-// Copyright Druid Mechanics
+// Copyright Min Creater
 
 
 #include "Character/AuraCharacterBase.h"
 #include "AbilitySystemComponent.h"
 #include "AuraGameplayTags.h"
 #include "AbilitySystem/AuraAbilitySystemComponent.h"
-#include "Aura/Aura.h"
 #include "Components/CapsuleComponent.h"
+#include "Aura/Aura.h"
 
+// Sets default values
 AAuraCharacterBase::AAuraCharacterBase()
 {
+ 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 
 	GetCapsuleComponent()->SetCollisionResponseToChannel(ECC_Camera, ECR_Ignore);
@@ -21,6 +23,8 @@ AAuraCharacterBase::AAuraCharacterBase()
 	Weapon = CreateDefaultSubobject<USkeletalMeshComponent>("Weapon");
 	Weapon->SetupAttachment(GetMesh(), FName("WeaponHandSocket"));
 	Weapon->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+
+
 }
 
 UAbilitySystemComponent* AAuraCharacterBase::GetAbilitySystemComponent() const
@@ -44,17 +48,19 @@ void AAuraCharacterBase::MulticastHandleDeath_Implementation()
 	Weapon->SetSimulatePhysics(true);
 	Weapon->SetEnableGravity(true);
 	Weapon->SetCollisionEnabled(ECollisionEnabled::PhysicsOnly);
-	
-	GetMesh()->SetSimulatePhysics(true);
+
 	GetMesh()->SetEnableGravity(true);
+	GetMesh()->SetSimulatePhysics(true);
 	GetMesh()->SetCollisionEnabled(ECollisionEnabled::PhysicsOnly);
 	GetMesh()->SetCollisionResponseToChannel(ECC_WorldStatic, ECR_Block);
-	
+
+
 	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	Dissolve();
 	bDead = true;
 }
 
+// Called when the game starts or when spawned
 void AAuraCharacterBase::BeginPlay()
 {
 	Super::BeginPlay();
@@ -63,6 +69,7 @@ void AAuraCharacterBase::BeginPlay()
 
 FVector AAuraCharacterBase::GetCombatSocketLocation_Implementation(const FGameplayTag& MontageTag)
 {
+	//TODO. MontageTag를 기반으로 올바른 소켓을 반환.
 	const FAuraGameplayTags& GameplayTags = FAuraGameplayTags::Get();
 	if (MontageTag.MatchesTagExact(GameplayTags.Montage_Attack_Weapon) && IsValid(Weapon))
 	{
@@ -93,7 +100,6 @@ TArray<FTaggedMontage> AAuraCharacterBase::GetAttackMontages_Implementation()
 {
 	return AttackMontages;
 }
-
 void AAuraCharacterBase::InitAbilityActorInfo()
 {
 }
@@ -133,9 +139,12 @@ void AAuraCharacterBase::Dissolve()
 	}
 	if (IsValid(WeaponDissolveMaterialInstance))
 	{
-		UMaterialInstanceDynamic* DynamicMatInst = UMaterialInstanceDynamic::Create(WeaponDissolveMaterialInstance, this);
+		UMaterialInstanceDynamic* DynamicMatInst = UMaterialInstanceDynamic::Create(DissolveMaterialInstance, this);
 		Weapon->SetMaterial(0, DynamicMatInst);
 		StartWeaponDissolveTimeline(DynamicMatInst);
 	}
 }
+
+
+
 

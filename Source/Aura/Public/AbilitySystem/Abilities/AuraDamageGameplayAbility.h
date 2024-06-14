@@ -1,4 +1,4 @@
-// Copyright Druid Mechanics
+// Copyright Min Creator
 
 #pragma once
 
@@ -18,10 +18,11 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void CauseDamage(AActor* TargetActor);
-protected:
 
+protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TSubclassOf<UGameplayEffect> DamageEffectClass;
+
 
 	UPROPERTY(EditDefaultsOnly, Category = "Damage")
 	TMap<FGameplayTag, FScalableFloat> DamageTypes;

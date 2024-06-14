@@ -1,4 +1,4 @@
-// Copyright Druid Mechanics
+// Copyright Min Creater
 
 
 #include "UI/Widget/AuraUserWidget.h"
