@@ -1,4 +1,4 @@
-// Copyright Min Creator
+// Copyright Druid Mechanics
 
 #pragma once
 
@@ -18,7 +18,6 @@ class AURA_API AAuraAIController : public AAIController
 	GENERATED_BODY()
 public:
 	AAuraAIController();
-
 protected:
 
 	UPROPERTY()

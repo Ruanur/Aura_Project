@@ -1,4 +1,4 @@
-// Copyright Min Creater
+// Copyright Druid Mechanics
 
 #pragma once
 
@@ -13,7 +13,6 @@ UCLASS()
 class AURA_API UMMC_MaxMana : public UGameplayModMagnitudeCalculation
 {
 	GENERATED_BODY()
-
 public:
 	UMMC_MaxMana();
 
@@ -23,4 +22,3 @@ private:
 
 	FGameplayEffectAttributeCaptureDefinition IntDef;
 };
-
