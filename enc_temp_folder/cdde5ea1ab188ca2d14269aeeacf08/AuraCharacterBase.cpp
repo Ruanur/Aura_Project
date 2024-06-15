@@ -21,9 +21,6 @@ AAuraCharacterBase::AAuraCharacterBase()
 	GetMesh()->SetGenerateOverlapEvents(true);
 
 	Weapon = CreateDefaultSubobject<USkeletalMeshComponent>("Weapon");
-
-	//블루프린트 내에서 소켓(WeaponHandSocket)에 메쉬(Mesh)를 부착할 수 있음
-	//SKM_[Name] 내에서 소켓 이름 변경 시 Weapon 부착됨
 	Weapon->SetupAttachment(GetMesh(), FName("WeaponHandSocket"));
 	Weapon->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
