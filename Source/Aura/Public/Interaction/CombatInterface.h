@@ -1,4 +1,4 @@
-// Copyright Min Creater
+// Copyright Druid Mechanics
 
 #pragma once
 
@@ -6,7 +6,6 @@
 #include "UObject/Interface.h"
 #include "GameplayTagContainer.h"
 #include "CombatInterface.generated.h"
-
 
 class UNiagaraSystem;
 class UAnimMontage;
@@ -18,7 +17,7 @@ struct FTaggedMontage
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	UAnimMontage* Montage = nullptr;
-	
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	FGameplayTag MontageTag;
 
@@ -33,6 +32,7 @@ class UCombatInterface : public UInterface
 	GENERATED_BODY()
 };
 
+
 /**
  * 
  */
@@ -43,7 +43,6 @@ class AURA_API ICombatInterface
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
 	virtual int32 GetPlayerLevel();
-
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	FVector GetCombatSocketLocation(const FGameplayTag& MontageTag);
@@ -67,4 +66,5 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	UNiagaraSystem* GetBloodEffect();
+	
 };

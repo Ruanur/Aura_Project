@@ -99,7 +99,6 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Combat")
 	UNiagaraSystem* BloodEffect;
 
-
 private:
 
 	UPROPERTY(EditAnywhere, Category = "Abilities")

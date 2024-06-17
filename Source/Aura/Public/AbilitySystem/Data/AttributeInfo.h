@@ -1,4 +1,4 @@
-// Copyright Min Creater
+// Copyright Druid Mechanics
 
 #pragma once
 
@@ -11,7 +11,7 @@ USTRUCT(BlueprintType)
 struct FAuraAttributeInfo
 {
 	GENERATED_BODY()
-	
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	FGameplayTag AttributeTag = FGameplayTag();
 
@@ -32,7 +32,6 @@ UCLASS()
 class AURA_API UAttributeInfo : public UDataAsset
 {
 	GENERATED_BODY()
-
 public:
 	FAuraAttributeInfo FindAttributeInfoForTag(const FGameplayTag& AttributeTag, bool bLogNotFound = false) const;
 

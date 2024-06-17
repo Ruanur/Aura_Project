@@ -1,4 +1,4 @@
-// Copyright Min Creater
+// Copyright Druid Mechanics
 
 #pragma once
 
@@ -7,20 +7,17 @@
 
 /**
  * AuraGameplayTags
- * 
- * Native GameplayTags를 포함하는 Singleton
+ *
+ * Singleton containing native Gameplay Tags
  */
+
 struct FAuraGameplayTags
 {
 public:
-	static const FAuraGameplayTags& Get()
-	{
-		return GameplayTags;
-	}
-	static void InitializeNativeGameplayTags();
+    static const FAuraGameplayTags& Get() { return GameplayTags;}
+    static void InitializeNativeGameplayTags();
 
-	//속성 추가
-	FGameplayTag Attributes_Primary_Strength; 
+	FGameplayTag Attributes_Primary_Strength;
 	FGameplayTag Attributes_Primary_Intelligence;
 	FGameplayTag Attributes_Primary_Resilience;
 	FGameplayTag Attributes_Primary_Vigor;
@@ -40,7 +37,7 @@ public:
 	FGameplayTag Attributes_Resistance_Lightning;
 	FGameplayTag Attributes_Resistance_Arcane;
 	FGameplayTag Attributes_Resistance_Physical;
-		
+
 	FGameplayTag InputTag_LMB;
 	FGameplayTag InputTag_RMB;
 	FGameplayTag InputTag_1;
@@ -63,8 +60,6 @@ public:
 	TMap<FGameplayTag, FGameplayTag> DamageTypesToResistances;
 
 	FGameplayTag Effects_HitReact;
-protected:
-
 private:
-	static FAuraGameplayTags GameplayTags;
+    static FAuraGameplayTags GameplayTags;
 };

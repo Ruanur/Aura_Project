@@ -1,13 +1,14 @@
-// Copyright Min Creater
+// Copyright Druid Mechanics
 
 
 #include "AbilitySystem/ModMagCalc/MMC_MaxMana.h"
+
 #include "AbilitySystem/AuraAttributeSet.h"
 #include "Interaction/CombatInterface.h"
 
 UMMC_MaxMana::UMMC_MaxMana()
 {
-	IntDef.AttributeToCapture = UAuraAttributeSet::GetVigorAttribute();
+	IntDef.AttributeToCapture = UAuraAttributeSet::GetIntelligenceAttribute();
 	IntDef.AttributeSource = EGameplayEffectAttributeCaptureSource::Target;
 	IntDef.bSnapshot = false;
 
@@ -16,9 +17,9 @@ UMMC_MaxMana::UMMC_MaxMana()
 
 float UMMC_MaxMana::CalculateBaseMagnitude_Implementation(const FGameplayEffectSpec& Spec) const
 {
-	//Gather tags from source and Target 
+	// Gather tags from source and target
 	const FGameplayTagContainer* SourceTags = Spec.CapturedSourceTags.GetAggregatedTags();
-	const FGameplayTagContainer* TargetTags = Spec.CapturedSourceTags.GetAggregatedTags();
+	const FGameplayTagContainer* TargetTags = Spec.CapturedTargetTags.GetAggregatedTags();
 
 	FAggregatorEvaluateParameters EvaluationParameters;
 	EvaluationParameters.SourceTags = SourceTags;
@@ -31,5 +32,5 @@ float UMMC_MaxMana::CalculateBaseMagnitude_Implementation(const FGameplayEffectS
 	ICombatInterface* CombatInterface = Cast<ICombatInterface>(Spec.GetContext().GetSourceObject());
 	const int32 PlayerLevel = CombatInterface->GetPlayerLevel();
 
-	return 50.f + 2.5 * Int + 15.f * PlayerLevel;
+	return 50.f + 2.5f * Int + 15.f * PlayerLevel;
 }

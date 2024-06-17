@@ -1,4 +1,4 @@
-// Copyright Min Creater
+// Copyright Druid Mechanics
 
 
 #include "AbilitySystem/Data/AttributeInfo.h"
