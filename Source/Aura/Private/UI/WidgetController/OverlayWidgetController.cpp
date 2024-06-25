@@ -5,6 +5,7 @@
 
 #include "AbilitySystem/AuraAbilitySystemComponent.h"
 #include "AbilitySystem/AuraAttributeSet.h"
+#include "AbilitySystem/Data/AbilityInfo.h"
 
 void UOverlayWidgetController::BroadcastInitialValues()
 {
@@ -82,7 +83,16 @@ void UOverlayWidgetController::BindCallbacksToDependencies()
 
 void UOverlayWidgetController::OnInitializeStartupAbilites(UAuraAbilitySystemComponent* AuraAbilitySystemComponent)
 {
-	//TODO Get infomation about all given abilities, look up their Ability Info, and broadcast it to widgets.
+	//TODO 주어진 모든 능력에 대한 정보를 얻고, 능력 정보를 찾아 위젯에 브로드캐스팅함.
 	if (!AuraAbilitySystemComponent->bStartupAbilitiesGiven) return;
 
+	FForEachAbility BroadcastDelegate;
+	BroadcastDelegate.BindLambda([this, AuraAbilitySystemComponent](const FGameplayAbilitySpec& AbilitySpec)
+	{
+			//TODO. 주어진 능력 사양에 대한 능력 태그를 알아낼 방법이 필요함.
+			FAuraAbilityInfo Info = AbilityInfo->FindAbilityInfoForTag(AuraAbilitySystemComponent->GetAbilityTagFromSpec(AbilitySpec));
+			Info.InputTag = AuraAbilitySystemComponent->GetInputTagFromSpec(AbilitySpec);
+			AbilityInfoDelegate.Broadcast(Info);
+	});
+	AuraAbilitySystemComponent->ForEachAbility(BroadcastDelegate);
 }
