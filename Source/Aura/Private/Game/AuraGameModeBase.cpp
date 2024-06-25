@@ -1,4 +1,4 @@
-// Copyright Druid Mechanics
+//Copyright Min Creator
 
 
 #include "Game/AuraGameModeBase.h"

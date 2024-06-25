@@ -1,4 +1,4 @@
-// Copyright Druid Mechanics
+//Copyright Min Creator
 
 
 #include "AbilitySystem/Data/CharacterClassInfo.h"

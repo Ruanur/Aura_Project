@@ -1,4 +1,4 @@
-// Copyright Druid Mechanics
+//Copyright Min Creator
 
 using UnrealBuildTool;
 using System.Collections.Generic;

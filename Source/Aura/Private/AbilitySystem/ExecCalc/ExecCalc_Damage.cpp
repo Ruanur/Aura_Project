@@ -1,4 +1,4 @@
-// Copyright Druid Mechanics
+//Copyright Min Creator
 
 
 #include "AbilitySystem/ExecCalc/ExecCalc_Damage.h"

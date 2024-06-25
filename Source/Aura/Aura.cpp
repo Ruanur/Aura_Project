@@ -1,4 +1,4 @@
-// Copyright Druid Mechanics
+//Copyright Min Creator
 
 #include "Aura.h"
 #include "Modules/ModuleManager.h"
