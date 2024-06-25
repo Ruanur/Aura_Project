@@ -48,6 +48,9 @@ public:
 	//AbilitySpec에서 입력 태그를 가져옴
 	static FGameplayTag GetInputTagFromSpec(const FGameplayAbilitySpec& AbilitySpec);
 protected:
+
+	virtual void OnRep_ActivateAbilities() override;
+
 	//클라이언트에서 게임 플레이 효과가 적용될 때 호출
 	UFUNCTION(Client, Reliable)
 	void ClientEffectApplied(UAbilitySystemComponent* AbilitySystemComponent, const FGameplayEffectSpec& EffectSpec, FActiveGameplayEffectHandle ActiveEffectHandle);
