@@ -30,6 +30,8 @@ public:
 
 	//초기 능력 추가
 	void AddCharacterAbilities(const TArray<TSubclassOf<UGameplayAbility>>& StartupAbilities);
+	//초기 패시브 능력 추가
+	void AddCharacterPassiveAbilities(const TArray<TSubclassOf<UGameplayAbility>>& StartupPassiveAbilities);
 	//초기 능력이 부여되었는지 확인
 	bool bStartupAbilitiesGiven = false;
 
