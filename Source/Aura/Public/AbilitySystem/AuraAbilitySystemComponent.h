@@ -49,6 +49,12 @@ public:
 
 	//AbilitySpec에서 입력 태그를 가져옴
 	static FGameplayTag GetInputTagFromSpec(const FGameplayAbilitySpec& AbilitySpec);
+
+	void UpgradeAttribute(const FGameplayTag& AttributeTag);
+
+	UFUNCTION(Server, Reliable)
+	void ServerUpgradeAttribute(const FGameplayTag& AttributeTag);
+
 protected:
 
 	virtual void OnRep_ActivateAbilities() override;
