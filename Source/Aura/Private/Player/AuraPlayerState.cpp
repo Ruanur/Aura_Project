@@ -1,4 +1,4 @@
-//Copyright Min Creator
+// Copyright Druid Mechanics
 
 
 #include "Player/AuraPlayerState.h"
@@ -45,7 +45,6 @@ void AAuraPlayerState::AddToLevel(int32 InLevel)
 	OnLevelChangedDelegate.Broadcast(Level);
 }
 
-
 void AAuraPlayerState::SetXP(int32 InXP)
 {
 	XP = InXP;
@@ -55,6 +54,7 @@ void AAuraPlayerState::SetXP(int32 InXP)
 void AAuraPlayerState::SetLevel(int32 InLevel)
 {
 	Level = InLevel;
+	OnLevelChangedDelegate.Broadcast(Level);
 }
 
 void AAuraPlayerState::OnRep_Level(int32 OldLevel)

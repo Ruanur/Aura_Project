@@ -1,4 +1,4 @@
-//Copyright Min Creator
+// Copyright Druid Mechanics
 
 #pragma once
 
@@ -7,11 +7,9 @@
 #include "Interaction/PlayerInterface.h"
 #include "AuraCharacter.generated.h"
 
-
 class UNiagaraComponent;
 class UCameraComponent;
 class USpringArmComponent;
-
 /**
  * 
  */
@@ -24,7 +22,7 @@ public:
 	virtual void PossessedBy(AController* NewController) override;
 	virtual void OnRep_PlayerState() override;
 
-	/** Players Interface */
+	/** Player Interface */
 	virtual void AddToXP_Implementation(int32 InXP) override;
 	virtual void LevelUp_Implementation() override;
 	virtual int32 GetXP_Implementation() const override;
@@ -41,19 +39,19 @@ public:
 	/** Combat Interface */
 	virtual int32 GetPlayerLevel_Implementation() override;
 	/** end Combat Interface */
-	
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<UNiagaraComponent> LevelUpNiagaraComponent;
-
+	
 private:
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UCameraComponent> TopDownCameraComponent;
 
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<USpringArmComponent> CameraBoom;
-
-	virtual void InitAbilityActorInfo() override;
 	
+	virtual void InitAbilityActorInfo() override;
+
 	UFUNCTION(NetMulticast, Reliable)
 	void MulticastLevelUpParticles() const;
 };

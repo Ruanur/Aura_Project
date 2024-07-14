@@ -1,4 +1,4 @@
-//Copyright Min Creator
+// Copyright Druid Mechanics
 
 
 #include "Character/AuraCharacterBase.h"
@@ -43,7 +43,7 @@ void AAuraCharacterBase::Die()
 void AAuraCharacterBase::MulticastHandleDeath_Implementation()
 {
 	UGameplayStatics::PlaySoundAtLocation(this, DeathSound, GetActorLocation(), GetActorRotation());
-
+	
 	Weapon->SetSimulatePhysics(true);
 	Weapon->SetEnableGravity(true);
 	Weapon->SetCollisionEnabled(ECollisionEnabled::PhysicsOnly);
@@ -123,7 +123,7 @@ int32 AAuraCharacterBase::GetMinionCount_Implementation()
 	return MinionCount;
 }
 
-void AAuraCharacterBase::IncrementMinionCount_Implementation(int32 Amount)
+void AAuraCharacterBase::IncremenetMinionCount_Implementation(int32 Amount)
 {
 	MinionCount += Amount;
 }

@@ -1,4 +1,4 @@
-//Copyright Min Creator
+// Copyright Druid Mechanics
 
 #pragma once
 
@@ -13,7 +13,6 @@ class UOverlayWidgetController;
 class UAuraUserWidget;
 struct FWidgetControllerParams;
 class USpellMenuWidgetController;
-
 /**
  * 
  */
@@ -21,7 +20,6 @@ UCLASS()
 class AURA_API AAuraHUD : public AHUD
 {
 	GENERATED_BODY()
-
 public:
 
 	UOverlayWidgetController* GetOverlayWidgetController(const FWidgetControllerParams& WCParams);

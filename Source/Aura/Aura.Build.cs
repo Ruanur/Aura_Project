@@ -1,4 +1,4 @@
-//Copyright Min Creator
+// Copyright Druid Mechanics
 
 using UnrealBuildTool;
 

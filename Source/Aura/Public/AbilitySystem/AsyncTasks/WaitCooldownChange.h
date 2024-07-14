@@ -1,4 +1,4 @@
-// Copyright Min Creater
+// Copyright Druid Mechanics
 
 #pragma once
 
@@ -19,7 +19,6 @@ UCLASS(BlueprintType, meta = (ExposedAsyncProxy = "AsyncTask"))
 class AURA_API UWaitCooldownChange : public UBlueprintAsyncActionBase
 {
 	GENERATED_BODY()
-
 public:
 	UPROPERTY(BlueprintAssignable)
 	FCooldownChangeSignature CooldownStart;
@@ -32,8 +31,8 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void EndTask();
-
 protected:
+
 	UPROPERTY()
 	TObjectPtr<UAbilitySystemComponent> ASC;
 

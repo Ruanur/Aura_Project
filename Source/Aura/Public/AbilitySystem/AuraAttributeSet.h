@@ -1,4 +1,4 @@
-//Copyright Min Creator
+// Copyright Druid Mechanics
 
 #pragma once
 
@@ -7,14 +7,12 @@
 #include "AbilitySystemComponent.h"
 #include "AuraAttributeSet.generated.h"
 
-// ATTRIBUTE_ACCESSORS 매크로 정의
 #define ATTRIBUTE_ACCESSORS(ClassName, PropertyName) \
 	GAMEPLAYATTRIBUTE_PROPERTY_GETTER(ClassName, PropertyName) \
 	GAMEPLAYATTRIBUTE_VALUE_GETTER(PropertyName) \
 	GAMEPLAYATTRIBUTE_VALUE_SETTER(PropertyName) \
 	GAMEPLAYATTRIBUTE_VALUE_INITTER(PropertyName)
 
-// 효과 속성 구조체 정의
 USTRUCT()
 struct FEffectProperties
 {
@@ -22,31 +20,31 @@ struct FEffectProperties
 
 	FEffectProperties(){}
 
-	FGameplayEffectContextHandle EffectContextHandle; //효과 컨텍스트 핸들
+	FGameplayEffectContextHandle EffectContextHandle;
 
 	UPROPERTY()
-	UAbilitySystemComponent* SourceASC = nullptr; //소스 능력 시스템 컴포넌트
+	UAbilitySystemComponent* SourceASC = nullptr;
 
 	UPROPERTY()
-	AActor* SourceAvatarActor = nullptr; //소스 아바타 액터
+	AActor* SourceAvatarActor = nullptr;
 
 	UPROPERTY()
-	AController* SourceController = nullptr; //소스 컨트롤러
+	AController* SourceController = nullptr;
 
 	UPROPERTY()
-	ACharacter* SourceCharacter = nullptr; // 소스 캐릭터
+	ACharacter* SourceCharacter = nullptr;
 
 	UPROPERTY()
-	UAbilitySystemComponent* TargetASC = nullptr; // 타겟 능력 시스템 컴포넌트
+	UAbilitySystemComponent* TargetASC = nullptr;
 
 	UPROPERTY()
-	AActor* TargetAvatarActor = nullptr; // 타겟 아바타 액터
+	AActor* TargetAvatarActor = nullptr;
 
 	UPROPERTY()
-	AController* TargetController = nullptr; // 타겟 컨트롤러
+	AController* TargetController = nullptr;
 
 	UPROPERTY()
-	ACharacter* TargetCharacter = nullptr; // 타겟 캐릭터
+	ACharacter* TargetCharacter = nullptr;
 };
 
 // typedef is specific to the FGameplayAttribute() signature, but TStaticFunPtr is generic to any signature chosen
@@ -55,7 +53,7 @@ template<class T>
 using TStaticFuncPtr = typename TBaseStaticDelegateInstance<T, FDefaultDelegateUserPolicy>::FFuncPtr;
 
 /**
- * Aura 속성 세트 클래스
+ * 
  */
 UCLASS()
 class AURA_API UAuraAttributeSet : public UAttributeSet
@@ -69,27 +67,26 @@ public:
 	virtual void PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data) override;
 	virtual void PostAttributeChange(const FGameplayAttribute& Attribute, float OldValue, float NewValue) override;
 
-
 	TMap<FGameplayTag, TStaticFuncPtr<FGameplayAttribute()>> TagsToAttributes;
 	
 	/*
-	 * 주요 속성
+	 * Primary Attributes
 	 */
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Strength, Category = "Primary Attributes")
-	FGameplayAttributeData Strength; //힘 속성
+	FGameplayAttributeData Strength;
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, Strength);
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Intelligence, Category = "Primary Attributes")
-	FGameplayAttributeData Intelligence; //지능 속성
+	FGameplayAttributeData Intelligence;
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, Intelligence);
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Resilience, Category = "Primary Attributes")
-	FGameplayAttributeData Resilience; //회복력 속성
+	FGameplayAttributeData Resilience;
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, Resilience);
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Vigor, Category = "Primary Attributes")
-	FGameplayAttributeData Vigor; //활력 속성
+	FGameplayAttributeData Vigor;
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, Vigor);
 
 	/*
@@ -97,43 +94,43 @@ public:
 	 */
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Armor, Category = "Secondary Attributes")
-	FGameplayAttributeData Armor; //방어력 속성
+	FGameplayAttributeData Armor;
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, Armor);
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_ArmorPenetration, Category = "Secondary Attributes")
-	FGameplayAttributeData ArmorPenetration; //방어력 관통 속성
+	FGameplayAttributeData ArmorPenetration;
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, ArmorPenetration);
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_BlockChance, Category = "Secondary Attributes")
-	FGameplayAttributeData BlockChance; //블록 확률 속성
+	FGameplayAttributeData BlockChance;
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, BlockChance);
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_CriticalHitChance, Category = "Secondary Attributes")
-	FGameplayAttributeData CriticalHitChance; //치명타 확률 속성
+	FGameplayAttributeData CriticalHitChance;
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, CriticalHitChance);
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_CriticalHitDamage, Category = "Secondary Attributes")
-	FGameplayAttributeData CriticalHitDamage; //치명타 피해 속성
+	FGameplayAttributeData CriticalHitDamage;
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, CriticalHitDamage);
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_CriticalHitResistance, Category = "Secondary Attributes")
-	FGameplayAttributeData CriticalHitResistance; //치명타 저항 속성
+	FGameplayAttributeData CriticalHitResistance;
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, CriticalHitResistance);
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HealthRegeneration, Category = "Secondary Attributes")
-	FGameplayAttributeData HealthRegeneration; //체력 재생 속성
+	FGameplayAttributeData HealthRegeneration;
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, HealthRegeneration);
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_ManaRegeneration, Category = "Secondary Attributes")
-	FGameplayAttributeData ManaRegeneration; //마나 재생 속성
+	FGameplayAttributeData ManaRegeneration;
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, ManaRegeneration);
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MaxHealth, Category = "Vital Attributes")
-	FGameplayAttributeData MaxHealth; //최대 체력 속성
+	FGameplayAttributeData MaxHealth;
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, MaxHealth);
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MaxMana, Category = "Vital Attributes")
-	FGameplayAttributeData MaxMana; //최대 마나 속성
+	FGameplayAttributeData MaxMana;
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, MaxMana);
 
 	/*
@@ -141,19 +138,19 @@ public:
 	 */
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_FireResistance, Category = "Resistance Attributes")
-	FGameplayAttributeData FireResistance; //화염 저항 속성
+	FGameplayAttributeData FireResistance;
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, FireResistance);
 	
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_LightningResistance, Category = "Resistance Attributes")
-	FGameplayAttributeData LightningResistance; //번개 저항 속성
+	FGameplayAttributeData LightningResistance;
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, LightningResistance);
 	
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_ArcaneResistance, Category = "Resistance Attributes")
-	FGameplayAttributeData ArcaneResistance; //아케인 저항 속성
+	FGameplayAttributeData ArcaneResistance;
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, ArcaneResistance);
 	
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_PhysicalResistance, Category = "Resistance Attributes")
-	FGameplayAttributeData PhysicalResistance; //물리 저항 속성
+	FGameplayAttributeData PhysicalResistance;
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, PhysicalResistance);
 
 	/*
@@ -161,11 +158,11 @@ public:
 	 */
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Health, Category = "Vital Attributes")
-	FGameplayAttributeData Health; //체력 속성
+	FGameplayAttributeData Health;
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, Health);
 	
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Mana, Category = "Vital Attributes")
-	FGameplayAttributeData Mana; //마나 속성
+	FGameplayAttributeData Mana;
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, Mana);
 
 
@@ -174,14 +171,13 @@ public:
 	 */
 
 	UPROPERTY(BlueprintReadOnly, Category = "Meta Attributes")
-	FGameplayAttributeData IncomingDamage; //들어오는 피해 속성
+	FGameplayAttributeData IncomingDamage;
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, IncomingDamage);
 
 	UPROPERTY(BlueprintReadOnly, Category = "Meta Attributes")
-	FGameplayAttributeData IncomingXP; //들어오는 XP 속성
+	FGameplayAttributeData IncomingXP;
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, IncomingXP);
 
-	//속성 변경 알림 함수들
 	UFUNCTION()
 	void OnRep_Health(const FGameplayAttributeData& OldHealth) const;
 

@@ -1,4 +1,4 @@
-//Copyright Min Creator
+// Copyright Druid Mechanics
 
 #pragma once
 
@@ -71,7 +71,7 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	UNiagaraSystem* GetBloodEffect();
-	
+
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	FTaggedMontage GetTaggedMontageByTag(const FGameplayTag& MontageTag);
 
@@ -79,7 +79,7 @@ public:
 	int32 GetMinionCount();
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void IncrementMinionCount(int32 Amount);
+	void IncremenetMinionCount(int32 Amount);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	ECharacterClass GetCharacterClass();

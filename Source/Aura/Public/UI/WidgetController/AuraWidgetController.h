@@ -1,4 +1,4 @@
-//Copyright Min Creator
+// Copyright Druid Mechanics
 
 #pragma once
 
@@ -55,7 +55,7 @@ public:
 	virtual void BroadcastInitialValues();
 	virtual void BindCallbacksToDependencies();
 
-	UPROPERTY(BlueprintAssignable, Category = "GAS|Messages")
+	UPROPERTY(BlueprintAssignable, Category="GAS|Messages")
 	FAbilityInfoSignature AbilityInfoDelegate;
 
 	void BroadcastAbilityInfo();
@@ -76,16 +76,16 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category="WidgetController")
 	TObjectPtr<UAttributeSet> AttributeSet;
 
-	UPROPERTY(BlueprintReadOnly, Category = "WidgetController")
+	UPROPERTY(BlueprintReadOnly, Category="WidgetController")
 	TObjectPtr<AAuraPlayerController> AuraPlayerController;
 
-	UPROPERTY(BlueprintReadOnly, Category = "WidgetController")
+	UPROPERTY(BlueprintReadOnly, Category="WidgetController")
 	TObjectPtr<AAuraPlayerState> AuraPlayerState;
 
-	UPROPERTY(BlueprintReadOnly, Category = "WidgetController")
+	UPROPERTY(BlueprintReadOnly, Category="WidgetController")
 	TObjectPtr<UAuraAbilitySystemComponent> AuraAbilitySystemComponent;
 
-	UPROPERTY(BlueprintReadOnly, Category = "WidgetController")
+	UPROPERTY(BlueprintReadOnly, Category="WidgetController")
 	TObjectPtr<UAuraAttributeSet> AuraAttributeSet;
 
 	AAuraPlayerController* GetAuraPC();

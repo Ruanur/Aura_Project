@@ -1,4 +1,4 @@
-//Copyright Min Creator
+// Copyright Druid Mechanics
 
 
 #include "AbilitySystem/AuraAbilitySystemLibrary.h"
@@ -36,12 +36,10 @@ UOverlayWidgetController* UAuraAbilitySystemLibrary::GetOverlayWidgetController(
 {
 	FWidgetControllerParams WCParams;
 	AAuraHUD* AuraHUD = nullptr;
-
 	if (MakeWidgetControllerParams(WorldContextObject, WCParams, AuraHUD))
 	{
 		return AuraHUD->GetOverlayWidgetController(WCParams);
 	}
-
 	return nullptr;
 }
 
@@ -49,12 +47,10 @@ UAttributeMenuWidgetController* UAuraAbilitySystemLibrary::GetAttributeMenuWidge
 {
 	FWidgetControllerParams WCParams;
 	AAuraHUD* AuraHUD = nullptr;
-
 	if (MakeWidgetControllerParams(WorldContextObject, WCParams, AuraHUD))
 	{
 		return AuraHUD->GetAttributeMenuWidgetController(WCParams);
 	}
-
 	return nullptr;
 }
 
@@ -62,12 +58,10 @@ USpellMenuWidgetController* UAuraAbilitySystemLibrary::GetSpellMenuWidgetControl
 {
 	FWidgetControllerParams WCParams;
 	AAuraHUD* AuraHUD = nullptr;
-
 	if (MakeWidgetControllerParams(WorldContextObject, WCParams, AuraHUD))
 	{
 		return AuraHUD->GetSpellMenuWidgetController(WCParams);
 	}
-
 	return nullptr;
 }
 
@@ -195,5 +189,3 @@ bool UAuraAbilitySystemLibrary::IsNotFriend(AActor* FirstActor, AActor* SecondAc
 	const bool bFriends = bBothArePlayers || bBothAreEnemies;
 	return !bFriends;
 }
-
-

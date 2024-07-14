@@ -1,4 +1,4 @@
- // Copyright Min Creater
+// Copyright Druid Mechanics
 
 
 #include "AbilitySystem/AsyncTasks/WaitCooldownChange.h"
@@ -9,21 +9,21 @@ UWaitCooldownChange* UWaitCooldownChange::WaitForCooldownChange(UAbilitySystemCo
 	UWaitCooldownChange* WaitCooldownChange = NewObject<UWaitCooldownChange>();
 	WaitCooldownChange->ASC = AbilitySystemComponent;
 	WaitCooldownChange->CooldownTag = InCooldownTag;
-
+	
 	if (!IsValid(AbilitySystemComponent) || !InCooldownTag.IsValid())
 	{
 		WaitCooldownChange->EndTask();
 		return nullptr;
 	}
 
-	// 재사용 대기 시간이 언제 끝났는지 확인 가능(Cooldown 태그 삭제)
+	// To know when a cooldown has ended (Cooldown Tag has been removed)
 	AbilitySystemComponent->RegisterGameplayTagEvent(
-		InCooldownTag, 
+		InCooldownTag,
 		EGameplayTagEventType::NewOrRemoved).AddUObject(
-			WaitCooldownChange, 
+			WaitCooldownChange,
 			&UWaitCooldownChange::CooldownTagChanged);
 
-	// 재사용 대기 시간이 언제 적용 되었는가를 확인 가능
+	// To know when a cooldown effect has been applied
 	AbilitySystemComponent->OnActiveGameplayEffectAddedDelegateToSelf.AddUObject(WaitCooldownChange, &UWaitCooldownChange::OnActiveEffectAdded);
 
 	return WaitCooldownChange;
@@ -31,7 +31,7 @@ UWaitCooldownChange* UWaitCooldownChange::WaitForCooldownChange(UAbilitySystemCo
 
 void UWaitCooldownChange::EndTask()
 {
-	if (IsValid(ASC)) return;
+	if (!IsValid(ASC)) return;
 	ASC->RegisterGameplayTagEvent(CooldownTag, EGameplayTagEventType::NewOrRemoved).RemoveAll(this);
 
 	SetReadyToDestroy();
@@ -68,7 +68,7 @@ void UWaitCooldownChange::OnActiveEffectAdded(UAbilitySystemComponent* TargetASC
 					TimeRemaining = TimesRemaining[i];
 				}
 			}
-
+			
 			CooldownStart.Broadcast(TimeRemaining);
 		}
 	}

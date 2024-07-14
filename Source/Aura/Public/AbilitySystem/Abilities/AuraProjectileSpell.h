@@ -1,4 +1,4 @@
-//Copyright Min Creator
+// Copyright Druid Mechanics
 
 #pragma once
 
@@ -8,9 +8,7 @@
 
 class AAuraProjectile;
 class UGameplayEffect;
-
 struct FGameplayTag;
-
 /**
  * 
  */

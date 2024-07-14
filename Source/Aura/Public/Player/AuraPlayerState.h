@@ -1,4 +1,4 @@
-//Copyright Min Creator
+// Copyright Druid Mechanics
 
 #pragma once
 
@@ -21,7 +21,6 @@ UCLASS()
 class AURA_API AAuraPlayerState : public APlayerState, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
-
 public:
 	AAuraPlayerState();
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
@@ -45,11 +44,10 @@ public:
 	void AddToLevel(int32 InLevel);
 	void AddToAttributePoints(int32 InPoints);
 	void AddToSpellPoints(int32 InPoints);
-
+	
 	void SetXP(int32 InXP);
 	void SetLevel(int32 InLevel);
-
-
+	
 protected:
 	
 	UPROPERTY(VisibleAnywhere)
@@ -62,16 +60,16 @@ private:
 
 	UPROPERTY(VisibleAnywhere, ReplicatedUsing=OnRep_Level)
 	int32 Level = 1;
-	
-	UPROPERTY(VisibleAnywhere, ReplicatedUsing = OnRep_XP)
+
+	UPROPERTY(VisibleAnywhere, ReplicatedUsing=OnRep_XP)
 	int32 XP = 1;
 
-	UPROPERTY(VisibleAnywhere, ReplicatedUsing = OnRep_XP)
+	UPROPERTY(VisibleAnywhere, ReplicatedUsing=OnRep_AttributePoints)
 	int32 AttributePoints = 0;
 
-	UPROPERTY(VisibleAnywhere, ReplicatedUsing = OnRep_XP)
+	UPROPERTY(VisibleAnywhere, ReplicatedUsing=OnRep_SpellPoints)
 	int32 SpellPoints = 1;
-
+	
 	UFUNCTION()
 	void OnRep_Level(int32 OldLevel);
 
@@ -84,4 +82,3 @@ private:
 	UFUNCTION()
 	void OnRep_SpellPoints(int32 OldSpellPoints);
 };
-

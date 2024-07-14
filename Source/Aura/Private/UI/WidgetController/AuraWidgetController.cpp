@@ -1,4 +1,4 @@
-//Copyright Min Creator
+// Copyright Druid Mechanics
 
 
 #include "UI/WidgetController/AuraWidgetController.h"
@@ -33,12 +33,11 @@ void UAuraWidgetController::BroadcastAbilityInfo()
 
 	FForEachAbility BroadcastDelegate;
 	BroadcastDelegate.BindLambda([this](const FGameplayAbilitySpec& AbilitySpec)
-		{
-			//TODO. 주어진 능력 사양에 대한 능력 태그를 알아낼 방법이 필요함.
-			FAuraAbilityInfo Info = AbilityInfo->FindAbilityInfoForTag(AuraAbilitySystemComponent->GetAbilityTagFromSpec(AbilitySpec));
-			Info.InputTag = AuraAbilitySystemComponent->GetInputTagFromSpec(AbilitySpec);
-			AbilityInfoDelegate.Broadcast(Info);
-		});
+	{
+		FAuraAbilityInfo Info = AbilityInfo->FindAbilityInfoForTag(AuraAbilitySystemComponent->GetAbilityTagFromSpec(AbilitySpec));
+		Info.InputTag = AuraAbilitySystemComponent->GetInputTagFromSpec(AbilitySpec);
+		AbilityInfoDelegate.Broadcast(Info);
+	});
 	GetAuraASC()->ForEachAbility(BroadcastDelegate);
 }
 
@@ -73,7 +72,7 @@ UAuraAttributeSet* UAuraWidgetController::GetAuraAS()
 {
 	if (AuraAttributeSet == nullptr)
 	{
-		AuraAttributeSet = Cast<UAuraAttributeSet>(AuraAttributeSet);
+		AuraAttributeSet = Cast<UAuraAttributeSet>(AttributeSet);
 	}
 	return AuraAttributeSet;
 }

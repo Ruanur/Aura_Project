@@ -1,4 +1,4 @@
-// Copyright Min Creater
+// Copyright Druid Mechanics
 
 #pragma once
 
@@ -25,7 +25,7 @@ struct FAuraAbilityInfo
 	TObjectPtr<const UTexture2D> Icon = nullptr;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	TObjectPtr<UMaterialInterface> BackgroundMaterial = nullptr;
+	TObjectPtr<const UMaterialInterface> BackgroundMaterial = nullptr;
 };
 
 /**
@@ -35,9 +35,9 @@ UCLASS()
 class AURA_API UAbilityInfo : public UDataAsset
 {
 	GENERATED_BODY()
-
 public:
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AbilityInfomation")
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AbilityInformation")
 	TArray<FAuraAbilityInfo> AbilityInformation;
 
 	FAuraAbilityInfo FindAbilityInfoForTag(const FGameplayTag& AbilityTag, bool bLogNotFound = false) const;

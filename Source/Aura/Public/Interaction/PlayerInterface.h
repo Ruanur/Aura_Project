@@ -1,4 +1,4 @@
-// Copyright Min Creater
+// Copyright Druid Mechanics
 
 #pragma once
 
@@ -22,6 +22,7 @@ class AURA_API IPlayerInterface
 
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
+
 	UFUNCTION(BlueprintNativeEvent)
 	int32 FindLevelForXP(int32 InXP) const;
 
@@ -33,7 +34,7 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent)
 	int32 GetSpellPointsReward(int32 Level) const;
-
+	
 	UFUNCTION(BlueprintNativeEvent)
 	void AddToXP(int32 InXP);
 
@@ -51,7 +52,7 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent)
 	int32 GetSpellPoints() const;
-
+	
 	UFUNCTION(BlueprintNativeEvent)
 	void LevelUp();
 };

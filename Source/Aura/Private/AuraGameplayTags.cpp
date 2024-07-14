@@ -1,4 +1,4 @@
-//Copyright Min Creator
+// Copyright Druid Mechanics
 
 
 #include "AuraGameplayTags.h"
@@ -122,12 +122,12 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 	GameplayTags.InputTag_Passive_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("InputTag.Passive.1"),
 		FString("Input Tag Passive Ability 1")
-	);
+		);
 
 	GameplayTags.InputTag_Passive_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("InputTag.Passive.2"),
 		FString("Input Tag Passive Ability 2")
-	);
+		);
 
 	GameplayTags.Damage = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Damage"),
@@ -177,12 +177,13 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 		);
 
 	/*
-	* Meta Attributes
-	*/
+	 * Meta Attributes
+	 */
+
 	GameplayTags.Attributes_Meta_IncomingXP = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Attributes.Meta.IncomingXP"),
 		FString("Incoming XP Meta Attribute")
-	);
+		);
 
 	/*
 	 * Map of Damage Types to Resistances
@@ -213,22 +214,21 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 	GameplayTags.Abilities_Summon = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Abilities.Summon"),
 		FString("Summon Ability Tag")
-	);
+		);
 
 	GameplayTags.Abilities_Fire_FireBolt = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Abilities.Fire.FireBolt"),
 		FString("FireBolt Ability Tag")
-	);
-
+		);
 
 	/*
-	 * Cooldown
-	 */
-
+	* Cooldown
+	*/
+	
 	GameplayTags.Cooldown_Fire_FireBolt = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Cooldown.Fire.FireBolt"),
 		FString("FireBolt Cooldown Tag")
-	);
+		);
 
 	/*
 	 * Combat Sockets
@@ -252,28 +252,29 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 	GameplayTags.CombatSocket_Tail = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("CombatSocket.Tail"),
 		FString("Tail")
-	);
+		);
+
 	/*
-	* Montage Tags
-	*/
+	 * Montage Tags
+	 */
 
 	GameplayTags.Montage_Attack_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Montage.Attack.1"),
 		FString("Attack 1")
-	);
+		);
 
 	GameplayTags.Montage_Attack_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Montage.Attack.2"),
 		FString("Attack 2")
-	);
+		);
 
 	GameplayTags.Montage_Attack_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Montage.Attack.3"),
 		FString("Attack 3")
-	);
+		);
 
 	GameplayTags.Montage_Attack_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Montage.Attack.4"),
 		FString("Attack 4")
-	);
+		);
 }
