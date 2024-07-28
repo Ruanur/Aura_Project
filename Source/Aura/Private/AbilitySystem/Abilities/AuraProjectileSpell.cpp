@@ -9,6 +9,25 @@
 #include "Interaction/CombatInterface.h"
 #include "Aura/Public/AuraGameplayTags.h"
 
+FString UAuraProjectileSpell::GetDescription(int32 Level)
+{
+	const int32 Damage = DamageTypes[FAuraGameplayTags::Get().Damage_Fire].GetValueAtLevel(Level);
+	if (Level == 1)
+	{
+		return FString::Printf(TEXT("<Title>Fire Bolt</>\n\n<Default>화염 구체를 발사하여 </><Damage>%d</> 피해를 입힙니다.</><Default> 일정 확률로 화염 피해를 입습니다.</>\n\n<Small>Level: </><Level>%d</>"), Damage, Level);
+	}
+	else
+	{
+		return FString::Printf(TEXT("<Title>Fire Bolt</>\n\n<Default>화염 구체를 %d개 발사하여 </><Damage>%d</> 피해를 입힙니다.</><Default> 일정 확률로 화염 피해를 입습니다.</>\n\n<Small>Level: </><Level>%d</>"), FMath::Min(Level, NumProjectiles), Damage, Level);
+	}
+}
+
+FString UAuraProjectileSpell::GetNextLevelDescription(int32 Level)
+{
+	const int32 Damage = DamageTypes[FAuraGameplayTags::Get().Damage_Fire].GetValueAtLevel(Level);
+	return FString::Printf(TEXT("<Title>Fire Bolt</>\n\n<Default>화염 구체를 %d개 발사하여 </><Damage>%d</> 피해를 입힙니다.</><Default> 일정 확률로 화염 피해를 입습니다.</>\n\n<Small>Level: </><Level>%d</>"), FMath::Min(Level, NumProjectiles), Damage, Level);
+}
+
 void UAuraProjectileSpell::ActivateAbility(const FGameplayAbilitySpecHandle Handle,
                                            const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo,
                                            const FGameplayEventData* TriggerEventData)
