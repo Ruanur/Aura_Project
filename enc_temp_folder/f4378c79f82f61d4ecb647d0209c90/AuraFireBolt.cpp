@@ -137,9 +137,7 @@ void UAuraFireBolt::SpawnProjectiles(const FVector& ProjectileTargetLocation, co
 
 		Projectile->DamageEffectParams = MakeDamageEffectParamsFromClassDefaults();
 
-		//(HomingTarget && HomingTarget->Implements)
-		//HomingTarget : 맵 바깥으로 파이어 볼트 능력을 사용시 NULL 발생
-		if (HomingTarget && HomingTarget->Implements<UCombatInterface>())
+		if (HomingTarget->Implements<UCombatInterface>())
 		{
 			Projectile->ProjectileMovement->HomingTargetComponent = HomingTarget->GetRootComponent();
 		}
