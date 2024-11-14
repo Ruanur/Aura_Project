@@ -55,8 +55,11 @@ public:
 	TArray<FTaggedMontage> AttackMontages;
 	
 
-	UPROPERTY(Replicated, BlueprintReadOnly)
+	UPROPERTY(ReplicatedUsing=OnRep_Stunned, BlueprintReadOnly)
 	bool bIsStunned = false;
+
+	UFUNCTION()
+	virtual void OnRep_Stunned();
 
 
 protected:
