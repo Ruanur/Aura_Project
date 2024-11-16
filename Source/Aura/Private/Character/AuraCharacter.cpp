@@ -159,6 +159,18 @@ int32 AAuraCharacter::GetPlayerLevel_Implementation()
 	return AuraPlayerState->GetPlayerLevel();
 }
 
+void AAuraCharacter::OnRep_Burned()
+{
+	if (bIsBurned)
+	{
+		BurnDebuffComponent->Activate();
+	}
+	else
+	{
+		BurnDebuffComponent->Deactivate();
+	}
+}
+
 void AAuraCharacter::OnRep_Stunned()
 {
 	if (UAuraAbilitySystemComponent* AuraASC = Cast<UAuraAbilitySystemComponent>(AbilitySystemComponent))
@@ -171,11 +183,15 @@ void AAuraCharacter::OnRep_Stunned()
 		BlockedTags.AddTag(GameplayTags.Player_Block_InputReleased);
 		if (bIsStunned)
 		{
-			AuraASC->AddLooseGameplayTags(BlockedTags);
+			AuraASC->AddLooseGameplayTags(BlockedTags); 
+			BurnDebuffComponent->Activate();
+			StunDebuffComponent->Activate();
 		}
 		else
 		{
 			AuraASC->RemoveLooseGameplayTags(BlockedTags);
+			BurnDebuffComponent->Activate();
+			StunDebuffComponent->Deactivate();
 		}
 	}
 }
