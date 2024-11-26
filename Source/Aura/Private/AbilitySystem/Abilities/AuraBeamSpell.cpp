@@ -1,10 +1,11 @@
-// Copyright Min Creator
+// Copyright Druid Mechanics
 
 
 #include "AbilitySystem/Abilities/AuraBeamSpell.h"
-#include "Kismet/KismetSystemLibrary.h"
+
 #include "AbilitySystem/AuraAbilitySystemLibrary.h"
 #include "GameFramework/Character.h"
+#include "Kismet/KismetSystemLibrary.h"
 
 void UAuraBeamSpell::StoreMouseDataInfo(const FHitResult& HitResult)
 {
@@ -12,7 +13,6 @@ void UAuraBeamSpell::StoreMouseDataInfo(const FHitResult& HitResult)
 	{
 		MouseHitLocation = HitResult.ImpactPoint;
 		MouseHitActor = HitResult.GetActor();
-
 	}
 	else
 	{
@@ -27,7 +27,6 @@ void UAuraBeamSpell::StoreOwnerVariables()
 		OwnerPlayerController = CurrentActorInfo->PlayerController.Get();
 		OwnerCharacter = Cast<ACharacter>(CurrentActorInfo->AvatarActor);
 	}
-
 }
 
 void UAuraBeamSpell::TraceFirstTarget(const FVector& BeamTargetLocation)
@@ -74,7 +73,7 @@ void UAuraBeamSpell::StoreAdditionalTargets(TArray<AActor*>& OutAdditionalTarget
 	TArray<AActor*> ActorsToIgnore;
 	ActorsToIgnore.Add(GetAvatarActorFromActorInfo());
 	ActorsToIgnore.Add(MouseHitActor);
-
+	
 	TArray<AActor*> OverlappingActors;
 	UAuraAbilitySystemLibrary::GetLivePlayersWithinRadius(
 		GetAvatarActorFromActorInfo(),
@@ -82,14 +81,14 @@ void UAuraBeamSpell::StoreAdditionalTargets(TArray<AActor*>& OutAdditionalTarget
 		ActorsToIgnore,
 		850.f,
 		MouseHitActor->GetActorLocation());
-
+	
 	int32 NumAdditionalTargets = FMath::Min(GetAbilityLevel() - 1, MaxNumShockTargets);
 	//int32 NumAdditionTargets = 5;
-
+	
 	UAuraAbilitySystemLibrary::GetClosestTargets(
 		NumAdditionalTargets,
-		OverlappingActors, 
-		OutAdditionalTargets, 
+		OverlappingActors,
+		OutAdditionalTargets,
 		MouseHitActor->GetActorLocation());
 
 	for (AActor* Target : OutAdditionalTargets)

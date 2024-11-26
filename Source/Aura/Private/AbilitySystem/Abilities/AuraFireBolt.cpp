@@ -1,4 +1,4 @@
-// Copyright Min Creator
+// Copyright Druid Mechanics
 
 
 #include "AbilitySystem/Abilities/AuraFireBolt.h"
@@ -15,26 +15,24 @@ FString UAuraFireBolt::GetDescription(int32 Level)
 	if (Level == 1)
 	{
 		return FString::Printf(TEXT(
-			//능력 이름
-			"<Title>Fire Bolt</>\n\n"
+			// Title
+			"<Title>FIRE BOLT</>\n\n"
 
-			//능력 레벨
+			// Level
 			"<Small>Level: </><Level>%d</>\n"
-
-			//능력 마나 소모량
+			// ManaCost
 			"<Small>ManaCost: </><ManaCost>%.1f</>\n"
+			// Cooldown
+			"<Small>Cooldown: </><Cooldown>%.1f</>\n\n"
+			
+			"<Default>Launches a bolt of fire, "
+			"exploding on impact and dealing: </>"
 
-			//쿨타임
-			"<Small>Cooldown: </><Cooldown>: %.1f</>\n\n"
+			// Damage
+			"<Damage>%d</><Default> fire damage with"
+			" a chance to burn</>"),
 
-			//설명
-			"<Default>화염 구체를 발사하여 " 
-
-			//피해량
-			"</><Damage>%d</> 피해를 입힙니다."
-			"<Default> 일정 확률로 화염 피해를 입습니다.</>"),
-
-			//값
+			// Values
 			Level,
 			ManaCost,
 			Cooldown,
@@ -43,31 +41,30 @@ FString UAuraFireBolt::GetDescription(int32 Level)
 	else
 	{
 		return FString::Printf(TEXT(
-			//능력 이름
-			"<Title>Fire Bolt</>\n\n"
+			// Title
+			"<Title>FIRE BOLT</>\n\n"
 
-			//능력 레벨
+			// Level
 			"<Small>Level: </><Level>%d</>\n"
-
-			//능력 마나 소모량
+			// ManaCost
 			"<Small>ManaCost: </><ManaCost>%.1f</>\n"
+			// Cooldown
+			"<Small>Cooldown: </><Cooldown>%.1f</>\n\n"
 
-			//쿨타임
-			"<Small>Cooldown: </><Cooldown>: %.1f</>\n\n"
+			// Number of FireBolts
+			"<Default>Launches %d bolts of fire, "
+			"exploding on impact and dealing: </>"
 
-			//화염 구체 개수
-			"<Default>화염 구체를 %d개 발사하여 "
+			// Damage
+			"<Damage>%d</><Default> fire damage with"
+			" a chance to burn</>"),
 
-			//피해량
-			"</><Damage>%d</> 피해를 입힙니다."
-			"<Default> 일정 확률로 화염 피해를 입습니다.</>"),
-
-			//값
+			// Values
 			Level,
 			ManaCost,
 			Cooldown,
 			FMath::Min(Level, NumProjectiles),
-			ScaledDamage);
+			ScaledDamage);		
 	}
 }
 
@@ -77,31 +74,30 @@ FString UAuraFireBolt::GetNextLevelDescription(int32 Level)
 	const float ManaCost = FMath::Abs(GetManaCost(Level));
 	const float Cooldown = GetCooldown(Level);
 	return FString::Printf(TEXT(
-		//능력 이름
-		"<Title>Fire Bolt</>\n\n"
+			// Title
+			"<Title>NEXT LEVEL: </>\n\n"
 
-		//능력 레벨
-		"<Small>Level: </><Level>%d</>\n"
+			// Level
+			"<Small>Level: </><Level>%d</>\n"
+			// ManaCost
+			"<Small>ManaCost: </><ManaCost>%.1f</>\n"
+			// Cooldown
+			"<Small>Cooldown: </><Cooldown>%.1f</>\n\n"
 
-		//능력 마나 소모량
-		"<Small>ManaCost: </><ManaCost>%.1f</>\n"
+			// Number of FireBolts
+			"<Default>Launches %d bolts of fire, "
+			"exploding on impact and dealing: </>"
 
-		//쿨타임
-		"<Small>Cooldown: </><Cooldown>: %.1f</>\n\n"
+			// Damage
+			"<Damage>%d</><Default> fire damage with"
+			" a chance to burn</>"),
 
-		//화염 구체 개수
-		"<Default>화염 구체를 %d개 발사하여 "
-
-		//피해량
-		"</><Damage>%d</> 피해를 입힙니다."
-		"<Default> 일정 확률로 화염 피해를 입습니다.</>"),
-
-		//값
-		Level,
-		ManaCost,
-		Cooldown,
-		FMath::Min(Level, NumProjectiles),
-		ScaledDamage);
+			// Values
+			Level,
+			ManaCost,
+			Cooldown,
+			FMath::Min(Level, NumProjectiles),
+			ScaledDamage);
 }
 
 void UAuraFireBolt::SpawnProjectiles(const FVector& ProjectileTargetLocation, const FGameplayTag& SocketTag, bool bOverridePitch, float PitchOverride, AActor* HomingTarget)
@@ -113,14 +109,11 @@ void UAuraFireBolt::SpawnProjectiles(const FVector& ProjectileTargetLocation, co
 		GetAvatarActorFromActorInfo(),
 		SocketTag);
 	FRotator Rotation = (ProjectileTargetLocation - SocketLocation).Rotation();
-	if (bOverridePitch)
-	{
-		Rotation.Pitch = PitchOverride;
-	}
+	if (bOverridePitch) Rotation.Pitch = PitchOverride;
+	
 	const FVector Forward = Rotation.Vector();
 	const int32 EffectiveNumProjectiles = FMath::Min(NumProjectiles, GetAbilityLevel());
-
-	TArray<FRotator> Rotations = UAuraAbilitySystemLibrary::EvenlySpacedRotators(Forward, FVector::UpVector, ProjectileSpread, NumProjectiles);
+	TArray<FRotator> Rotations = UAuraAbilitySystemLibrary::EvenlySpacedRotators(Forward, FVector::UpVector, ProjectileSpread, EffectiveNumProjectiles);
 
 	for (const FRotator& Rot : Rotations)
 	{
@@ -134,11 +127,9 @@ void UAuraFireBolt::SpawnProjectiles(const FVector& ProjectileTargetLocation, co
 		GetOwningActorFromActorInfo(),
 		Cast<APawn>(GetOwningActorFromActorInfo()),
 		ESpawnActorCollisionHandlingMethod::AlwaysSpawn);
-
+	
 		Projectile->DamageEffectParams = MakeDamageEffectParamsFromClassDefaults();
 
-		//(HomingTarget && HomingTarget->Implements)
-		//HomingTarget : 맵 바깥으로 파이어 볼트 능력을 사용시 NULL 발생
 		if (HomingTarget && HomingTarget->Implements<UCombatInterface>())
 		{
 			Projectile->ProjectileMovement->HomingTargetComponent = HomingTarget->GetRootComponent();
@@ -148,13 +139,10 @@ void UAuraFireBolt::SpawnProjectiles(const FVector& ProjectileTargetLocation, co
 			Projectile->HomingTargetSceneComponent = NewObject<USceneComponent>(USceneComponent::StaticClass());
 			Projectile->HomingTargetSceneComponent->SetWorldLocation(ProjectileTargetLocation);
 			Projectile->ProjectileMovement->HomingTargetComponent = Projectile->HomingTargetSceneComponent;
-
 		}
-		Projectile->ProjectileMovement->HomingAccelerationMagnitude = FMath::FRandRange(HomingAcclerationMin, HomingAcclerationMax);
+		Projectile->ProjectileMovement->HomingAccelerationMagnitude = FMath::FRandRange(HomingAccelerationMin, HomingAccelerationMax);
 		Projectile->ProjectileMovement->bIsHomingProjectile = bLaunchHomingProjectiles;
-
+		
 		Projectile->FinishSpawning(SpawnTransform);
 	}
-
-	
 }

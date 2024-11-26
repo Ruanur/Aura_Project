@@ -32,9 +32,9 @@ struct FDamageEffectParams
 
 	UPROPERTY(BlueprintReadWrite)
 	FGameplayTag DamageType = FGameplayTag();
-
+	
 	UPROPERTY(BlueprintReadWrite)
-	float DebuffChange = 0.f;
+	float DebuffChance = 0.f;
 
 	UPROPERTY(BlueprintReadWrite)
 	float DebuffDamage = 0.f;
