@@ -18,6 +18,7 @@
 
 AAuraCharacter::AAuraCharacter()
 {
+	//CreateDefaultSubobject: 오브젝트 생성
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>("CameraBoom");
 	CameraBoom->SetupAttachment(GetRootComponent());
 	CameraBoom->SetUsingAbsoluteRotation(true);
