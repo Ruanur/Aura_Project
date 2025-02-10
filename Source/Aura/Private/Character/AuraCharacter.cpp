@@ -68,50 +68,72 @@ void AAuraCharacter::AddToXP_Implementation(int32 InXP)
 	AuraPlayerState->AddToXP(InXP);
 }
 
+// 레벨업 시 호출되는 함수
 void AAuraCharacter::LevelUp_Implementation()
 {
+	// 레벨업 파티클 효과를 활성화하는 함수 호출
 	MulticastLevelUpParticles();
 }
 
+// 레벨업 파티클 효과를 활성화하는 함수
 void AAuraCharacter::MulticastLevelUpParticles_Implementation() const
 {
+	// LevelUpNiagaraComponent가 유효한지 확인
 	if (IsValid(LevelUpNiagaraComponent))
 	{
+		// 카메라 위치를 가져옴
 		const FVector CameraLocation = TopDownCameraComponent->GetComponentLocation();
+		// Niagara 시스템 위치를 가져옴
 		const FVector NiagaraSystemLocation = LevelUpNiagaraComponent->GetComponentLocation();
+		// 카메라 위치와 Niagara 시스템 위치 간의 방향으로 회전을 계산
 		const FRotator ToCameraRotation = (CameraLocation - NiagaraSystemLocation).Rotation();
+		// Niagara 컴포넌트의 월드 회전을 계산된 방향으로 설정
 		LevelUpNiagaraComponent->SetWorldRotation(ToCameraRotation);
+		// Niagara 컴포넌트를 활성화
 		LevelUpNiagaraComponent->Activate(true);
 	}
 }
 
+// 플레이어의 현재 경험치를 반환하는 함수
 int32 AAuraCharacter::GetXP_Implementation() const
 {
+	// 플레이어 상태를 가져옴
 	const AAuraPlayerState* AuraPlayerState = GetPlayerState<AAuraPlayerState>();
 	check(AuraPlayerState);
+	// 플레이어의 현재 경험치를 반환
 	return AuraPlayerState->GetXP();
 }
 
+// 주어진 경험치에 따른 플레이어 레벨을 찾는 함수
 int32 AAuraCharacter::FindLevelForXP_Implementation(int32 InXP) const
 {
+	// 플레이어 상태를 가져옴
 	const AAuraPlayerState* AuraPlayerState = GetPlayerState<AAuraPlayerState>();
 	check(AuraPlayerState);
+	// 주어진 경험치에 해당하는 레벨을 반환
 	return AuraPlayerState->LevelUpInfo->FindLevelForXP(InXP);
 }
 
+// 특정 레벨에서 플레이어가 받을 속성 포인트 보상을 반환하는 함수
 int32 AAuraCharacter::GetAttributePointsReward_Implementation(int32 Level) const
 {
+	// 플레이어 상태를 가져옴
 	const AAuraPlayerState* AuraPlayerState = GetPlayerState<AAuraPlayerState>();
 	check(AuraPlayerState);
+	// 특정 레벨에서 플레이어가 받을 속성 포인트 보상을 반환
 	return AuraPlayerState->LevelUpInfo->LevelUpInformation[Level].AttributePointAward;
 }
 
+// 특정 레벨에서 플레이어가 받을 주문 포인트 보상을 반환하는 함수
 int32 AAuraCharacter::GetSpellPointsReward_Implementation(int32 Level) const
 {
+	// 플레이어 상태를 가져옴
 	const AAuraPlayerState* AuraPlayerState = GetPlayerState<AAuraPlayerState>();
 	check(AuraPlayerState);
+	// 특정 레벨에서 플레이어가 받을 주문 포인트 보상을 반환
 	return AuraPlayerState->LevelUpInfo->LevelUpInformation[Level].SpellPointAward;
 }
+
 
 void AAuraCharacter::AddToPlayerLevel_Implementation(int32 InPlayerLevel)
 {
